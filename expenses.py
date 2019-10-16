@@ -1,6 +1,7 @@
 import wget
 import zipfile
 import pandas as pd
+import os
 
 def get_expenses(city, year):
     """ Fetches expenses data from tce for a given city and year. 
@@ -14,6 +15,7 @@ def get_expenses(city, year):
     url_prefix = "https://transparencia.tce.sp.gov.br/sites/default/" \
             + "files/csv/despesas"
     expenses_url = url_prefix + "-" + city + "-" + str(year) + ".zip"
+    os.mkdir('../data')
     expenses_zipfile = '../data/expense_{}_{}.zip'.format(city, year)
     wget.download(expenses_url, expenses_zipfile)
 
