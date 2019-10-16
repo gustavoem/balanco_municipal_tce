@@ -16,15 +16,15 @@ def get_expenses(city, year):
             + "files/csv/despesas"
     expenses_url = url_prefix + "-" + city + "-" + str(year) + ".zip"
     try:
-        os.mkdir('../data')
+        os.mkdir('data')
     except OSError as error:
         pass
-    expenses_zipfile = '../data/expense_{}_{}.zip'.format(city, year)
+    expenses_zipfile = 'data/expense_{}_{}.zip'.format(city, year)
     wget.download(expenses_url, expenses_zipfile)
 
     with zipfile.ZipFile(expenses_zipfile, 'r') as zip_ref:
-        expenses_csv = '../data/' + zip_ref.namelist()[-1]
-        extracted_files = zip_ref.extractall('../data/')
+        expenses_csv = 'data/' + zip_ref.namelist()[-1]
+        extracted_files = zip_ref.extractall('data/')
 
     # Create df with csv
     data = pd.read_csv(expenses_csv, delimiter=';', 
